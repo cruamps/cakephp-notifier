@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CakeManager (http://cakemanager.org)
  * Copyright (c) http://cakemanager.org
@@ -12,6 +13,7 @@
  * @since         1.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace Notifier\Test\TestCase\Utility;
 
 use Cake\Core\Configure;
@@ -182,8 +184,11 @@ class NotificationManagerTest extends TestCase
         $result = Configure::read('Notifier.templates.newNotification');
 
         $expected = [
-            'title' => 'New Notification',
-            'body' => ':from has sent :to a notification about :about'
+            'default' => [
+                'title' => 'New Notification',
+                'body' => ':from has sent :to a notification about :about',
+                'lang' => 'default'
+            ]
         ];
 
         $this->assertEquals($expected, $result);
@@ -191,14 +196,16 @@ class NotificationManagerTest extends TestCase
 
     public function testGetTemplate()
     {
-        Configure::write('Notifier.templates.newNotification', [
+        Configure::write('Notifier.templates.newNotification.default', [
             'title' => 'New Notification',
-            'body' => ':from has sent :to a notification about :about'
+            'body' => ':from has sent :to a notification about :about',
+            'lang' => 'default'
         ]);
 
         $expected = [
             'title' => 'New Notification',
-            'body' => ':from has sent :to a notification about :about'
+            'body' => ':from has sent :to a notification about :about',
+            'lang' => 'default'
         ];
 
         $this->assertEquals($expected, $this->Manager->getTemplate('newNotification'));
