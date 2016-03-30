@@ -19,6 +19,7 @@ namespace Notifier\Model\Entity;
 use Cake\Core\Configure;
 use Cake\ORM\Entity;
 use Cake\Utility\Text;
+use Locale;
 
 /**
  * Notification Entity.
@@ -85,9 +86,10 @@ class Notification extends Entity
      *
      * @return string
      */
-    protected function _getTitle($lang = 'default')
+    protected function _getTitle()
     {
         $templates = Configure::read('Notifier.templates');
+        $lang = Locale::getDefault();
 
         if (array_key_exists($this->_properties['template'], $templates)) {
             if (!array_key_exists($lang, $templates[$this->_properties['template']])) {
@@ -115,9 +117,10 @@ class Notification extends Entity
      *
      * @return string
      */
-    protected function _getBody($lang = 'default')
+    protected function _getBody()
     {
         $templates = Configure::read('Notifier.templates');
+        $lang = Locale::getDefault();
 
         if (array_key_exists($this->_properties['template'], $templates)) {
             if (!array_key_exists($lang, $templates[$this->_properties['template']])) {
