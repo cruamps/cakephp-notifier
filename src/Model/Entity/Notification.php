@@ -93,8 +93,11 @@ class Notification extends Entity
             if (!array_key_exists($lang, $templates[$this->_properties['template']])) {
                 $lang = 'default';
             }
-
-            $template = $templates[$this->_properties['template']][$lang];
+            if (isset($templates[$this->_properties['template']][$lang])) {
+                $template = $templates[$this->_properties['template']][$lang];
+            } else {
+                $template = current($templates[$this->_properties['template']]);
+            }
 
             $vars = json_decode($this->_properties['vars'], true);
 
@@ -120,8 +123,11 @@ class Notification extends Entity
             if (!array_key_exists($lang, $templates[$this->_properties['template']])) {
                 $lang = 'default';
             }
-
-            $template = $templates[$this->_properties['template']][$lang];
+            if (isset($templates[$this->_properties['template']][$lang])) {
+                $template = $templates[$this->_properties['template']][$lang];
+            } else {
+                $template = current($templates[$this->_properties['template']]);
+            }
 
             $vars = json_decode($this->_properties['vars'], true);
 
